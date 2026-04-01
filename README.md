@@ -81,7 +81,22 @@ I like apple
 I like banana
 I like mango
 ```
+<h1>4. What is an arrow function?</h1>
 
+```
+An arrow function is a shorter, more concise way to write functions in JavaScript, introduced in ES6 (2015).
+
+It uses the => (fat arrow) syntax instead of the traditional function keyword.
+
+Example:
+
+// Traditional function
+function add(a, b) {
+  return a + b;
+}
+
+// Arrow function
+const add = (a, b) => a + b;
 ```
 <h1>5. What are template literals?</h1>
 
