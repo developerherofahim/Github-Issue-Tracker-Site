@@ -136,48 +136,6 @@ const displayIssueCard = (issues) =>{
 }
 
 
-// const displayTab = (issues) => {
-//   const container = document.getElementById("tab-container");
-//   container.innerHTML = "";
-
-//   issues.forEach(issue => {
-
-//     const div = document.createElement("div");
-//     div.className = "bg-white rounded-2xl shadow-md p-5 flex flex-col h-full";
-
-//     const uniqueLabels = [...new Set(issue.labels)];
-
-//     div.innerHTML = `
-//       <div class="flex justify-between items-center mb-4">
-//         <span class="w-3 h-3 bg-green-400 rounded-full"></span>
-//         <span class="bg-orange-200 text-orange-700 px-3 py-1 rounded-full text-sm">
-//           ${issue.priority}
-//         </span>
-//       </div>
-
-//       <h2 class="text-lg font-semibold mb-2">${issue.title}</h2>
-
-//       <p class="text-gray-600 text-sm mb-4 grow">
-//         ${issue.description}
-//       </p>
-
-//       <div class="mb-4">
-//         ${uniqueLabels.map(label => `
-//           <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded text-xs mr-2">
-//             ${label}
-//           </span>
-//         `).join("")}
-//       </div>
-
-//       <div class="border-t pt-3 text-sm text-gray-500">
-//         ${issue.user} <br>
-//         ${issue.date}
-//       </div>
-//     `;
-
-//     container.appendChild(div);
-//   });
-// };
 
 loadIssue();
 
