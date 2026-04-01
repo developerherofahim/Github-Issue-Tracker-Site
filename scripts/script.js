@@ -201,4 +201,6 @@ document.getElementById("search-btn").addEventListener("click", () => {
 
      displayIssueCard(filterIssue);
     });
+
+    filterIssues(false);
 });
