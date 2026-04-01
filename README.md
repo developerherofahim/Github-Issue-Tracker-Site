@@ -98,20 +98,3 @@ function add(a, b) {
 // Arrow function
 const add = (a, b) => a + b;
 ```
-<h1>5. What are template literals?</h1>
-
-```
-Template Literals (also called Template Strings) are a modern way to work with strings in JavaScript, introduced in ES6 (2015).
-They are created using backticks ` instead of single (' ') or double quotes (" ").
-
-Example:
-
-// Old way (string concatenation)
-const name = "Md Fahim";
-const city = "Chattogram";
-console.log("Hello, my name is " + name + " and I live in " + city + ".");
-
-// New way: Template Literal
-const message = `Hello, my name is ${name} and I live in ${city}.`;
-console.log(message);
-```
