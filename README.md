@@ -33,55 +33,6 @@ Example:
     
 ```
 
-<h1>3. What is the difference between map(), filter(), and forEach()?</h1>
-
-```
-1. map() – Transform every element
-
-Use map() when you want to create a new array by changing each item.
-
-Example: 
-
-const numbers = [1, 2, 3, 4, 5];
-
-// Double every number
-const doubled = numbers.map(num => num * 2);
-console.log(doubled);     // [2, 4, 6, 8, 10]
-console.log(numbers);     // [1, 2, 3, 4, 5] ← original unchanged
-```
-```
-2. filter() – Keep only certain elements
-
-Use filter() when you want a new array containing only items that match a condition.
-
-Example:
-
-const numbers = [1, 2, 3, 4, 5, 6];
-
-// Get only even numbers
-const evens = numbers.filter(num => num % 2 === 0);
-console.log(evens);        // [2, 4, 6]
-```
-```
-3. forEach() – Just do something with each element
-
-Use forEach() when you don’t need a new array — just want to perform an action (like logging, pushing to another array, updating DOM, etc.).
-
-Example:
-
-const fruits = ["apple", "banana", "mango"];
-
-fruits.forEach(fruit => {
-  console.log("I like " + fruit);
-});
-
-Output:
-
-I like apple
-I like banana
-I like mango
-```
-
 <h1>4. What is an arrow function?</h1>
 
 ```
