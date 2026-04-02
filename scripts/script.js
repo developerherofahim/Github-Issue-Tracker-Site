@@ -105,7 +105,7 @@ const displayIssueDetails = (details) => {
     const modalDiv = document.getElementById('modal-content')
     modalDiv.innerHTML = `
     
-    <div class="issue-card space-y-3 bg-white rounded-2xl shadow-md p-6 flex flex-col border-green-400 grow">
+    <div class="issue-card space-y-3 bg-white rounded-2xl p-6 flex flex-col border-green-400 grow">
             
             <div class="flex flex-col grow gap-3 sm:gap-6">
                 <h3 class="text-xl font-bold text-[#1F2937]">${details.title}</h3>
@@ -139,7 +139,7 @@ const displayIssueDetails = (details) => {
                 <div>
                   <p class="font-normal text-[#64748B] grow">${details.description}</p>
                 </div>
-                <div class="flex gap-64 items-center bg-gray-200 shadow-sm p-4 rounded-xl">
+                <div class="flex gap-6 sm:gap-16 items-center bg-gray-200 shadow-sm p-4 rounded-xl">
                   <div>
                     <p> Assignee:<br><span class="font-bold">${details.assignee}</span>
                   </div>
