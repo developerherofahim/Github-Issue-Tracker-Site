@@ -102,22 +102,22 @@ const loadIssueDetail = async (id) => {
 
 const displayIssueDetails = (details) => {
 
-    const modalDiv = document.getElementById('my_modal_5')
+    const modalDiv = document.getElementById('modal-content')
     modalDiv.innerHTML = `
     
     <div class="issue-card space-y-3 bg-white rounded-2xl shadow-md p-6 flex flex-col border-green-400 grow">
             
-            <div class="flex flex-col grow gap-6">
+            <div class="flex flex-col grow gap-3 sm:gap-6">
                 <h3 class="text-xl font-bold text-[#1F2937]">${details.title}</h3>
 
                   <div class= 'flex gap-2'>
                     <p class="badge open-status bg-green-700 rounded-full text-gray-50">Opened</p>
                     <p class="badge close-status bg-violet-700 rounded-full text-gray-50">Closed</p>
-                    <div class='flex items-center gap-2'>
+                    <div class='hidden sm:flex items-center gap-2'>
                       <div class="h-1 w-1 rounded-full bg-gray-700"></div>
                       <p class="font-normal text-[#64748B] text-sm">Opened By ${details.author}</p>
                     </div>
-                    <div class='flex items-center gap-2'>
+                    <div class='hidden sm:flex items-center gap-2'>
                       <div class="h-1 w-1 rounded-full bg-gray-700"></div>
                       <p class="font-normal text-[#64748B] text-sm">${new Date(details.createdAt).toLocaleDateString()}</p>
                     </div>
