@@ -1,4 +1,7 @@
 const loadIssue = () => {
+
+  manageSpinner(true);
+
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues") // promise of response
     .then((res) => res.json()) // promise of json data
     .then((json) => {
@@ -36,10 +39,15 @@ const filterIssues = (status, btn) => {
 
   let issueLength = document.getElementById("issue-length")
 
-  let filtered = [];
+  manageSpinner(true)
+
+  setTimeout(() => {
+
+     let filtered = [];
 
   if (status === "all") {
     filtered = allIssue;
+
   } 
   else if (status === "open") {
     filtered = allIssue.filter(issue => issue.status === "open");
@@ -51,9 +59,22 @@ const filterIssues = (status, btn) => {
   issueLength.innerText = filtered.length;
 
   displayIssueCard(filtered);
+    
+  }, 400 );
 };
 
 displayTab();
+
+const manageSpinner = (status) => {
+  if (status == true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("issue-container").classList.add("hidden");
+  } else {
+    document.getElementById("issue-container").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+};
+
 
 // "id": 1,
 // "title": "Fix navigation menu on mobile devices",
@@ -70,6 +91,87 @@ displayTab();
 // "updatedAt": "2024-01-15T10:30:00Z"
 // },
 
+const loadIssueDetail = async (id) => {
+  console.log(id)
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+  console.log(url)
+  const res = await fetch(url);
+  const details = await res.json();
+  displayIssueDetails(details.data);
+};
+
+const displayIssueDetails = (details) => {
+
+    const modalDiv = document.getElementById('my_modal_5')
+    modalDiv.innerHTML = `
+    
+    <div class="issue-card space-y-3 bg-white rounded-2xl shadow-md p-6 flex flex-col border-green-400 grow">
+            
+            <div class="flex flex-col grow gap-6">
+                <h3 class="text-xl font-bold text-[#1F2937]">${details.title}</h3>
+
+                  <div class= 'flex gap-2'>
+                    <p class="badge open-status bg-green-700 rounded-full text-gray-50">Opened</p>
+                    <p class="badge close-status bg-violet-700 rounded-full text-gray-50">Closed</p>
+                    <div class='flex items-center gap-2'>
+                      <div class="h-1 w-1 rounded-full bg-gray-700"></div>
+                      <p class="font-normal text-[#64748B] text-sm">Opened By ${details.author}</p>
+                    </div>
+                    <div class='flex items-center gap-2'>
+                      <div class="h-1 w-1 rounded-full bg-gray-700"></div>
+                      <p class="font-normal text-[#64748B] text-sm">${new Date(details.createdAt).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+
+                <div class="flex gap-1">
+                ${details.labels.map(label => {
+                    if(label === "bug"){
+                    return `<span class="badge bg-red-300 mr-2 rounded-full"> ${label}</span>`;
+                    }
+                    if(label === "help wanted"){
+                    return `<span class="badge bg-blue-300 mr-2 rounded-full"> ${label}</span>`;
+                    }
+                    else{
+                    return `<span class="badge bg-blue-300 mr-2 rounded-full">others</span>`;
+                    }
+                }).join("")}
+                </div>
+                <div>
+                  <p class="font-normal text-[#64748B] grow">${details.description}</p>
+                </div>
+                <div class="flex gap-64 items-center bg-gray-200 shadow-sm p-4 rounded-xl">
+                  <div>
+                    <p> Assignee:<br><span class="font-bold">${details.assignee}</span>
+                  </div>
+                  <div>
+                    <p> Priority:<br><span class="badge bg-red-600 text-gray-100">${details.priority}</span>
+                  </div>
+                </div>
+                <div class="modal-action">
+                  <form method="dialog">
+                    <button class="btn btn-primary">Close</button>
+                  </form>
+                </div>
+           </div>
+
+          
+    </div>
+    `
+        const openStatus = modalDiv.querySelector(".open-status")
+        const closedStatus = modalDiv.querySelector(".close-status")
+
+        if(details.status === "open"){
+            openStatus.classList.remove ("hidden")
+            closedStatus.classList.add ("hidden")
+        }
+        else if(details.status === "closed"){
+            openStatus.classList.add ("hidden")
+            closedStatus.classList.remove ("hidden")
+        }
+
+    document.getElementById("my_modal_5").showModal();
+}
+
 const displayIssueCard = (issues) =>{
     const issueContainer = document.getElementById("issue-container");
 
@@ -81,7 +183,7 @@ const displayIssueCard = (issues) =>{
 
 
         div.innerHTML = `
-        <div class="issue-card space-y-3 bg-white rounded-2xl shadow-md p-5 flex flex-col h-full border-green-400 grow">
+        <div onclick={loadIssueDetail(${issue.id})} class="issue-card space-y-3 bg-white rounded-2xl shadow-md p-5 flex flex-col h-full border-green-400 grow">
             <div class="flex justify-between items-center">
                 <img class="open-status" src="./assets/Open-Status.png" alt="">
                 <img class="close-status" src="./assets/Closed- Status .png" alt="">
@@ -133,6 +235,8 @@ const displayIssueCard = (issues) =>{
 
         issueContainer.appendChild(div);
     }
+
+    manageSpinner(false);
 }
 
 
